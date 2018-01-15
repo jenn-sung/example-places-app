@@ -9,7 +9,11 @@ class PlacesController < ApplicationController
     name: params[:name],
     address: params[:name]
     )
-    place.save
-    render json: place.as_json
+    if place.save
+      render json: place.as_json
+    else
+      render json: {errors: place.errors.full_messages}
+    end
   end
 end
+
